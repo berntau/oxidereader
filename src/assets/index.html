@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OxideReader</title>
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Viewport for Reader Content -->
+    <div id="viewport-container">
+      <div id="loading-indicator">Carregando livro...</div>
+      <iframe id="reader-frame" sandbox="allow-same-origin allow-scripts"></iframe>
+    </div>
+
+    <!-- Index Mode Overlay (Table of Contents) -->
+    <div id="index-overlay">
+      <div id="index-header">
+        <h2>Índice de Capítulos [Tab / Esc para fechar, j/k para navegar, Enter para abrir]</h2>
+        <span id="index-count">0 capítulos</span>
+      </div>
+      <ul id="index-list"></ul>
+    </div>
+
+    <!-- Help Modal Overlay -->
+    <div id="help-overlay">
+      <h3>Atalhos de Teclado (Zathura / Vim Mode)</h3>
+      <div class="help-grid">
+        <span class="help-key">j / ↓</span><span>Rolar para baixo</span>
+        <span class="help-key">k / ↑</span><span>Rolar para cima</span>
+        <span class="help-key">d / Ctrl-d</span><span>Rolar meia página para baixo</span>
+        <span class="help-key">u / Ctrl-u</span><span>Rolar meia página para cima</span>
+        <span class="help-key">Espaço</span><span>Avançar página inteira</span>
+        <span class="help-key">Shift-Espaço / b</span><span>Recuar página inteira</span>
+        <span class="help-key">gg</span><span>Ir para o início do capítulo</span>
+        <span class="help-key">G</span><span>Ir para o final do capítulo</span>
+        <span class="help-key">J / n / ]</span><span>Próximo capítulo</span>
+        <span class="help-key">K / p / [</span><span>Capítulo anterior</span>
+        <span class="help-key">Tab</span><span>Alternar Modo Índice (TOC)</span>
+        <span class="help-key">r</span><span>Alternar Modo Recolor Gruvbox</span>
+        <span class="help-key">+ / =</span><span>Aumentar tamanho da fonte</span>
+        <span class="help-key">-</span><span>Diminuir tamanho da fonte</span>
+        <span class="help-key">0</span><span>Restaurar tamanho da fonte padrão</span>
+        <span class="help-key">:</span><span>Abrir barra de comandos (:goto, :open, :help)</span>
+        <span class="help-key">/</span><span>Buscar no capítulo</span>
+        <span class="help-key">h / ?</span><span>Abrir esta ajuda</span>
+        <span class="help-key">Esc</span><span>Cancelar busca / fechar índice / sair de modo</span>
+      </div>
+    </div>
+
+    <!-- Notifications banner -->
+    <div id="notification"></div>
+
+    <!-- Auto-completion Bar -->
+    <div id="completion-box"></div>
+
+    <!-- Command and Search Inputbar -->
+    <div id="inputbar">
+      <span id="inputbar-prefix">:</span>
+      <input type="text" id="inputbar-input" autocomplete="off" spellcheck="false" />
+    </div>
+
+    <!-- Authentic Zathura Statusbar -->
+    <div id="statusbar">
+      <div class="status-left">
+        <span id="status-title">[Carregando...]</span>
+      </div>
+      <div class="status-right">
+        <span id="status-chapter">[-- / --]</span>
+        <span id="status-scroll">[0%]</span>
+        <span id="status-zoom">[100%]</span>
+        <span id="status-recolor" class="status-badge recolor-on">[RECOLOR]</span>
+        <span id="status-mode" class="status-badge">[NORMAL]</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="/assets/app.js"></script>
+</body>
+</html>

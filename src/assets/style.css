@@ -1,0 +1,353 @@
+:root {
+  --notification-error-bg: rgba(251, 241, 199, 1);
+  --notification-error-fg: rgba(157, 0, 6, 1);
+  --notification-warning-bg: rgba(251, 241, 199, 1);
+  --notification-warning-fg: rgba(181, 118, 20, 1);
+  --notification-bg: rgba(251, 241, 199, 1);
+  --notification-fg: rgba(121, 116, 14, 1);
+
+  --completion-bg: rgba(213, 196, 161, 1);
+  --completion-fg: rgba(60, 56, 54, 1);
+  --completion-group-bg: rgba(235, 219, 178, 1);
+  --completion-group-fg: rgba(146, 131, 116, 1);
+  --completion-highlight-bg: rgba(7, 102, 120, 1);
+  --completion-highlight-fg: rgba(213, 196, 161, 1);
+
+  --index-bg: rgba(213, 196, 161, 1);
+  --index-fg: rgba(60, 56, 54, 1);
+  --index-active-bg: rgba(7, 102, 120, 1);
+  --index-active-fg: rgba(213, 196, 161, 1);
+
+  --inputbar-bg: rgba(251, 241, 199, 1);
+  --inputbar-fg: rgba(60, 56, 54, 1);
+
+  --statusbar-bg: rgba(213, 196, 161, 1);
+  --statusbar-fg: rgba(60, 56, 54, 1);
+
+  --highlight-color: rgba(181, 118, 20, 0.5);
+  --highlight-active-color: rgba(175, 58, 3, 0.5);
+
+  --default-bg: rgba(251, 241, 199, 1);
+  --default-fg: rgba(60, 56, 54, 1);
+
+  --recolor-lightcolor: rgba(251, 241, 199, 1);
+  --recolor-darkcolor: rgba(60, 56, 54, 1);
+
+  --font-mono: "JetBrains Mono", "Fira Code", monospace;
+  --font-serif: "Merriweather", "Georgia", "Iosevka Etoile", serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--default-bg);
+  color: var(--default-fg);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  user-select: none;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  background-color: var(--default-bg);
+}
+
+/* Reader Viewport */
+#viewport-container {
+  flex: 1;
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 24px);
+  overflow: hidden;
+  background-color: var(--default-bg);
+}
+
+#reader-frame {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background-color: var(--default-bg);
+  display: block;
+}
+
+/* Statusbar - Fixed single line at bottom (authentic Zathura) */
+#statusbar {
+  height: 24px;
+  min-height: 24px;
+  max-height: 24px;
+  background-color: var(--statusbar-bg);
+  color: var(--statusbar-fg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  z-index: 100;
+  border-top: 1px solid rgba(146, 131, 116, 0.2);
+}
+
+.status-left, .status-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.status-left {
+  flex: 1;
+  max-width: 65%;
+}
+
+.status-badge {
+  padding: 1px 6px;
+  background-color: var(--completion-group-bg);
+  color: var(--completion-group-fg);
+  border-radius: 2px;
+  font-size: 11px;
+}
+
+.status-badge.recolor-on {
+  background-color: var(--index-active-bg);
+  color: var(--index-active-fg);
+}
+
+/* Notification banner inside statusbar */
+#notification {
+  display: none;
+  position: absolute;
+  bottom: 24px;
+  left: 0;
+  right: 0;
+  padding: 4px 10px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  z-index: 101;
+}
+
+#notification.info {
+  background-color: var(--notification-bg);
+  color: var(--notification-fg);
+  border-top: 2px solid var(--notification-fg);
+}
+
+#notification.warning {
+  background-color: var(--notification-warning-bg);
+  color: var(--notification-warning-fg);
+  border-top: 2px solid var(--notification-warning-fg);
+}
+
+#notification.error {
+  background-color: var(--notification-error-bg);
+  color: var(--notification-error-fg);
+  border-top: 2px solid var(--notification-error-fg);
+}
+
+/* Inputbar - replaces or overlays statusbar when active */
+#inputbar {
+  display: none;
+  height: 24px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--inputbar-bg);
+  color: var(--inputbar-fg);
+  align-items: center;
+  padding: 0 8px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  z-index: 105;
+  border-top: 1px solid rgba(146, 131, 116, 0.4);
+}
+
+#inputbar-prefix {
+  font-weight: bold;
+  padding-right: 4px;
+  color: var(--inputbar-fg);
+}
+
+#inputbar-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--inputbar-fg);
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+
+/* Completion Box */
+#completion-box {
+  display: none;
+  position: absolute;
+  bottom: 24px;
+  left: 0;
+  right: 0;
+  max-height: 220px;
+  overflow-y: auto;
+  background-color: var(--completion-bg);
+  color: var(--completion-fg);
+  border-top: 1px solid var(--completion-group-fg);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  z-index: 106;
+}
+
+.completion-item {
+  padding: 4px 10px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+}
+
+.completion-item.selected {
+  background-color: var(--completion-highlight-bg);
+  color: var(--completion-highlight-fg);
+}
+
+.completion-item .desc {
+  opacity: 0.7;
+  font-size: 11px;
+}
+
+/* Index Mode (TOC) Overlay */
+#index-overlay {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 24px;
+  background-color: var(--index-bg);
+  color: var(--index-fg);
+  z-index: 90;
+  overflow-y: auto;
+  font-family: var(--font-mono);
+}
+
+#index-header {
+  padding: 12px 18px;
+  background-color: var(--completion-group-bg);
+  border-bottom: 1px solid rgba(60, 56, 54, 0.15);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#index-header h2 {
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+#index-list {
+  list-style: none;
+  padding: 8px 0;
+}
+
+.index-item {
+  padding: 6px 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background-color 0.05s ease;
+}
+
+.index-item:hover {
+  background-color: rgba(7, 102, 120, 0.2);
+}
+
+.index-item.active {
+  background-color: var(--index-active-bg);
+  color: var(--index-active-fg);
+  font-weight: 600;
+}
+
+.index-item-title {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.index-item-page {
+  font-size: 11px;
+  opacity: 0.75;
+  margin-left: 12px;
+}
+
+/* Help Modal Overlay */
+#help-overlay {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 580px;
+  max-width: 90vw;
+  max-height: 80vh;
+  background-color: var(--default-bg);
+  color: var(--default-fg);
+  border: 2px solid var(--index-active-bg);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
+  padding: 20px;
+  z-index: 150;
+  overflow-y: auto;
+  font-family: var(--font-mono);
+}
+
+#help-overlay h3 {
+  color: var(--index-active-bg);
+  margin-bottom: 14px;
+  font-size: 15px;
+  border-bottom: 1px solid var(--completion-group-bg);
+  padding-bottom: 6px;
+}
+
+.help-grid {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 8px;
+  font-size: 12px;
+}
+
+.help-key {
+  font-weight: bold;
+  color: var(--notification-fg);
+}
+
+/* Loading screen */
+#loading-indicator {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--default-bg);
+  color: var(--default-fg);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  z-index: 80;
+  pointer-events: none;
+  display: none;
+}
