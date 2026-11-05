@@ -52,6 +52,8 @@ Esta trilha foi desenhada para avançar por fases modulares. Cada fase explora c
 
 ### 🟢 Fase 1: Fundamentos de I/O, Bytes e Tratamento de Erros
 
+> 📘 **[Guia passo a passo: `docs/fase-1.md`](docs/fase-1.md)** — roteiro de laboratório com previsões, quebras propositais e checkpoints.
+
 O objetivo é entender como Rust interage com o sistema de arquivos e como funciona seu tratamento de erros estrito sem exceções (`try/catch`).
 
 - [ ] **1.1. Entrada de argumentos da CLI**
@@ -131,6 +133,11 @@ O leitor web deve replicar com fidelidade a experiência do Zathura.
 - [ ] **4.3. Modo Índice (`Index Mode` / tecla `Tab`)**
   - Ao pressionar `Tab`, um overlay com a árvore de capítulos é exibido nas cores `index-bg` (`#d5c4a1`) e `index-fg` (`#3c3836`).
   - Navegação vertical com `j`/`k`, seleção destacada com `index-active-bg` (`#076678`), pulo com `Enter` e fechamento com `Tab`/`Esc`.
+- [ ] **4.3b. Painel lateral persistente (ícone *hamburger*)**
+  - Alternativa a mouse para o mesmo índice: um botão ☰ abre uma *sidebar* fixa à esquerda, que permanece aberta durante a leitura (em vez do overlay modal do `Tab`).
+  - Cabeçalho do painel: miniatura da capa, título e autor — todos já disponíveis nos metadados do `content.opf` extraídos na fase 2.4.
+  - Lista de capítulos a partir da árvore `TocItem` da fase 2.5, com itens pais recolhíveis (seta ▶) para livros em múltiplas partes e realce do capítulo atual.
+  - Decisões de layout a definir: empurrar o conteúdo ou sobrepor; largura redimensionável; persistir aberto/fechado no `localStorage` junto das preferências do item 4.6.
 - [ ] **4.4. Barra de Comandos (`:`) e Autocomplete**
   - Ao pressionar `:`, a barra de comandos é ativada no rodapé.
   - Comandos suportados:
