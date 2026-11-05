@@ -14,7 +14,17 @@ O objetivo do **OxideReader** é duplo:
 
 ## 🎨 A Paleta: Gruvbox Light (Zathura Config)
 
-O visual do leitor segue a configuração do Zathura:
+O visual do leitor segue a configuração do Zathura.
+
+> **Decisão de projeto: Light-only.** Não haverá tema escuro. O motor de recolor
+> da fase 5 é construído sobre um único par fundo/texto fixo
+> (`--recolor-lightcolor` / `--recolor-darkcolor`); suportar dark exigiria dois
+> pares e uma regra separada de preservação de imagens para cada um. O `style.css`
+> já reflete essa escolha — um único bloco `:root`, sem `prefers-color-scheme`.
+>
+> Note que o *recolor* (tecla `r`) **não** é um alternador claro/escuro: ele força
+> o conteúdo do livro para a paleta Gruvbox, enquanto a UI do leitor permanece
+> Gruvbox Light nos dois estados.
 
 | Elemento Zathura | Variável / Config | Valor RGBA | Hex | Papel na UI |
 | :--- | :--- | :--- | :--- | :--- |
