@@ -3,16 +3,8 @@ name = "oxide-reader"
 version = "0.1.0"
 edition = "2024"
 
+# Adicione cada crate com `cargo add <nome>` quando a fase da trilha pedir.
 [dependencies]
-tokio = { version = "1", features = ["full"] }
-axum = { version = "0.7" }
-serde = { version = "1.0", features = ["derive"] }
-serde_json = "1.0"
-zip = "2"
-quick-xml = "0.37"
-tower-http = { version = "0.6", features = ["cors"] }
-thiserror = "2"
-open = "5"
 
 
 
